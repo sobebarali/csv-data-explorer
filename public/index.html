@@ -16,10 +16,55 @@
         th {
             background-color: #f2f2f2;
         }
+        .upload-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+        hr {
+            margin: 30px 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <h1>Data Explorer</h1>
+    
+    <!-- Add CSV Upload Section -->
+    <div class="upload-section">
+        <h2>Upload CSV</h2>
+        <form id="uploadForm">
+            <label for="csv_url">CSV URL:</label>
+            <input type="text" id="csv_url" name="csv_url" placeholder="Enter CSV URL"><br><br>
+            <button type="button" onclick="uploadCSV()">Upload CSV</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- Existing Search Form -->
+    <h2>Search Data</h2>
     <form id="searchForm">
         <label for="appid">App ID:</label>
         <input type="number" id="appid" name="appid"><br><br>
@@ -116,6 +161,42 @@
                 row.insertCell(2).textContent = formattedDate;
                 row.insertCell(3).textContent = item.price;
             });
+        }
+
+        async function uploadCSV() {
+            const csvUrl = document.getElementById('csv_url').value;
+            
+            if (!csvUrl) {
+                alert('Please enter a CSV URL');
+                return;
+            }
+
+            try {
+                const response = await fetch('/csv/upload-csv', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': apiKey
+                    },
+                    body: JSON.stringify({ csv_url: csvUrl })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('CSV uploaded successfully!');
+                } else {
+                    alert(`Upload failed: ${data.detail?.message || data.detail || 'Unknown error'}`);
+                    
+                    // If there are specific errors, display them
+                    if (data.detail?.errors) {
+                        console.error('Upload errors:', data.detail.errors);
+                    }
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert('Failed to upload CSV. Check console for details.');
+            }
         }
 
         // Fetch the API key when the page loads
