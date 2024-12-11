@@ -7,7 +7,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from database import Base
+from src.database import Base
 from src.modules.csv_module.models import CSVData 
 
 # Load environment variables from .env file

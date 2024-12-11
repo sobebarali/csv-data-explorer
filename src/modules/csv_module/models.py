@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean, Date, Index
-from database import Base
+from src.database import Base
 
 class CSVData(Base):
     __tablename__ = "csv_data"
