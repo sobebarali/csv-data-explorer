@@ -1,9 +1,9 @@
 import logging
 from sqlalchemy.orm import Session
 import pandas as pd
-from modules.csv_module.models import CSVData
-from modules.csv_module.utils import parse_date
-from modules.csv_module.schemas import CSVDataResponse
+from src.modules.csv_module.models import CSVData
+from src.modules.csv_module.utils import parse_date
+from src.modules.csv_module.schemas import CSVDataResponse
 import requests
 from io import StringIO
 

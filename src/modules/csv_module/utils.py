@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-from modules.csv_module.constants import DATE_FORMATS
+from src.modules.csv_module.constants import DATE_FORMATS
 
 
 def parse_date(date_str: str) -> Optional[datetime.date]:

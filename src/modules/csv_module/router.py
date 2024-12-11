@@ -7,13 +7,13 @@ from datetime import datetime
 from sqlalchemy import case
 
 
-from modules.csv_module.models import CSVData
-from database import get_db
-from modules.auth_module.dependencies import get_api_key
+from src.modules.csv_module.models import CSVData
+from src.database import get_db
+from src.modules.auth_module.dependencies import get_api_key
 
-from modules.csv_module.schemas import CSVUploadRequest, QueryDataRequest, PaginatedResponse
+from src.modules.csv_module.schemas import CSVUploadRequest, QueryDataRequest, PaginatedResponse
 
-from modules.csv_module.service import process_csv_upload
+from src.modules.csv_module.service import process_csv_upload
 
 router = APIRouter()
 

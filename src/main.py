@@ -1,7 +1,7 @@
 import logging
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from modules.csv_module.router import router as csv
+from src.modules.csv_module.router import router as csv
 from src.config import SEGWISE_API_KEY
 
 # Configure logging
